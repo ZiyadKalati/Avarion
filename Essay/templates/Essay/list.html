@@ -10,8 +10,12 @@
 {% block content %}
 
         <div class="trays">
-            <div class="single-tray">
             
+            {% if user.is_authenticated %}
+            <div class="new"><a href="{% url 'essay_create' %}">New +</a></div>
+            {% endif %}
+            
+            <div class="single-tray">
             	{% for essay in all_essays %}
                 <div class="entry">
                     <a href="{% url 'essay_detail' essay.slug %}"><h1 class="card">A</h1></a>

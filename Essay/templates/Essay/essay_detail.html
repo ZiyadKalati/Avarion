@@ -13,9 +13,9 @@
             <div class="content">
                 <h1>{{ essay.title }}</h1>
 
-		{% if user.is_authenticated %}
-		<a href="{% url 'essay_update' essay.slug %}">Edit</a>
-		{% endif %}
+		        {% if user.is_authenticated %}
+		        <a href="{% url 'essay_update' essay.slug %}">Edit</a>
+		        {% endif %}
 
                 {{ essay.content|linebreaks }}
             </div>

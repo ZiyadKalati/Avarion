@@ -2,10 +2,15 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from .models import *
 
 # Create your views here.
+
+class EssayCreate(CreateView):
+    model = Essay
+    fields = ['title', 'slug', 'category', 'content']
+    template_name = "Essay/create_form.html"
 
 class EssayDetail(DetailView):
     """
