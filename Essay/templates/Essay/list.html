@@ -1,0 +1,25 @@
+{% extends "root/base.html" %}
+
+{% load static %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "root/css/base-list.css" %}" />
+
+{% endblock %}
+
+{% block content %}
+
+        <div class="trays">
+            <div class="single-tray">
+            
+            	{% for essay in all_essays %}
+                <div class="entry">
+                    <a href="{% url 'essay_detail' essay.slug %}"><h1 class="card">A</h1></a>
+                    <h4><a href="{% url 'essay_detail' essay.slug %}">{{ essay.title }}</a></h4>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+
+{% endblock %}

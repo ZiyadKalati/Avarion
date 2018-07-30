@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avarion</title>
+    {% load static %}
+    {% block stylesheets %}
+
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+
+            <div class="navbar">
+                <ul>
+                    <li><a href="{% url 'essay_list' 'thoughts' %}">Thoughts</a></li>
+                    <li id="name"><a href="{% url 'home' %}">A</a></li>
+                    <li><a href="{% url 'essay_list' 'meditations' %}">Meditations</a></li>
+                </ul>
+            </div>
+            <div class="nav-border"></div>
+            <div class="banner banner1"></div>
+            <div class="banner banner2"></div>
+        </div>
+        {% block content %}
+        
+        {% endblock %}                
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "root/base.html" %}
+
+{% load static %}
+{% load essay_extras %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "root/css/base-note.css" %}" />
+
+{% endblock %}
+
+{% block content %}
+        <div class="main-body">
+            <div class="content">
+                <h1>{{ essay.title }}</h1>
+
+		{% if user.is_authenticated %}
+		<a href="{% url 'essay_update' essay.slug %}">Edit</a>
+		{% endif %}
+
+                {{ essay.content|linebreaks }}
+            </div>
+        </div>
+
+{% endblock %}
