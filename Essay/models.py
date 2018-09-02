@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 #from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -87,9 +88,9 @@ class Essay(models.Model):
         return super(Essay, self).save(*args, **kwargs)
 
 
-    @models.permalink
+    #@models.permalink
     def get_absolute_url(self):
-        return ('essay_detail', {'slug' : self.slug})
+        return reverse('essay_detail', kwargs={'slug': self.object.slug})
 
     #############################
     @property
