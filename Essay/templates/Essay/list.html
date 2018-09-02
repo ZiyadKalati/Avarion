@@ -16,14 +16,24 @@
             {% endif %}
             
             <div class="single-tray">
-            	{% for essay in all_essays %}
+            	{% for essay in all_final %}
                 <div class="entry">
                     <a href="{% url 'essay_detail' essay.slug %}"><h1 class="card">A</h1></a>
                     <h4><a href="{% url 'essay_detail' essay.slug %}">{{ essay.title }}</a></h4>
                 </div>
                 {% endfor %}
-                
             </div>
+            
+            {% if user.is_authenticated and all_drafts %}
+            <div class="single-tray">
+            	{% for essay in all_drafts %}
+                <div class="entry">
+                    <a href="{% url 'essay_detail' essay.slug %}"><h1 class="card">A</h1></a>
+                    <h4><a href="{% url 'essay_detail' essay.slug %}">{{ essay.title }}</a></h4>
+                </div>
+                {% endfor %}      
+            </div>
+            {% endif %}
         </div>
 
 {% endblock %}

@@ -1,21 +1,43 @@
 from django.db import models
-from django.template.defaultfilters import slugify
+#from django.template.defaultfilters import slugify
+from django.core.exceptions import ObjectDoesNotExist
 
 from copy import deepcopy
+from random import choice
+import string
 
 # Create your models here.
-"""
+
 class EssayManager(models.Manager):
     def copy_essay(self, old_draft):
-        """"""
+        """
         Makes a deep copy of an essay and returns it
         :param old_draft: The Essay object to be copied
         :return: The copied instance of the Essay object
-        """"""
+        """
         copy = deepcopy(old_draft)
         copy.is_published = False
         return copy
-"""
+
+    def gen_slug(self, size=11, chars=string.ascii_letters + string.digits + "_"):
+        """
+        You still need to do this doc.
+        :param size: The length of the slug
+        :param chars: The characters that will constitute the makeup of the slug
+        :return: The newly generated slug
+        """
+        acceptable_collisions = 10
+
+        for collisioni in range(acceptable_collisions):
+            new_slug = "".join(choice(chars) for _ in range(size))
+            try:
+                Essay.objects.get(slug=new_slug)
+            except ObjectDoesNotExist:
+                return new_slug
+            else:
+                if collisioni == (acceptable_collisions - 1):
+                    # Recursive
+                    return self.gen_slug(size=(size + 1))
 
 class Essay(models.Model):
     """
@@ -37,19 +59,33 @@ class Essay(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
+    is_draft = models.BooleanField(default=False)
     objects = models.Manager()
-    #copy = EssayManager()
+    essay_manager = EssayManager()
 
     def __unicode__(self):
         return self.title
 
     def __str__(self):
         return self.title
-        
+
     def save(self, *args, **kwargs):
+        """
+        Override the save method to check if a slug exists for this essay,
+        if not then create a random 11 character string and assign it to 'slug'.
+        The reason a random string of characters is created is because an
+        option to change the title of the essay will be given to the user. If
+        the title of the essay is slugified instead, and the title is later
+        changed when the essay is edited, the slug and essay title will not
+        match. That would look horrendous.
+
+        Note: There is no way to check for collisions yet.
+        """
+
         if not self.slug:
-            self.slug = slugify(self.title)
-        super(Essay, self).save(*args, **kwargs)
+            self.slug = Essay.essay_manager.gen_slug()
+        return super(Essay, self).save(*args, **kwargs)
+
 
     @models.permalink
     def get_absolute_url(self):
