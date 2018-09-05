@@ -1,7 +1,6 @@
 *.pyc
 *~
 __pycahche__
-/static
 .DS_Store
 Avarion/secret_key.py
 local_setting.py
