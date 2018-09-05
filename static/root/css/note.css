@@ -1,0 +1,52 @@
+.main-body {
+    grid-column: after-banner1 / before-banner2;
+    grid-row: after-nav / end;
+
+    display: grid;
+    grid-template-columns: 10% [content-start] auto [content-end] 25%;
+    grid-template-rows: auto;
+    #background: linear-gradient(90deg, transparent, #1a1e3a, transparent);
+    #background: #232744;
+
+    #border: 1px solid white;
+    position: relative;
+    border-top: 1px solid rgb(212,175,55);
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.main-body::before, .main-body::after {
+  content: "";
+  position: absolute;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(212,175,55)), to(transparent));
+  background-image: -webkit-linear-gradient(rgb(212,175,55), transparent);
+  background-image: -moz-linear-gradient(rgb(212,175,55), transparent);
+  background-image: -o-linear-gradient(rgb(212,175,55), transparent);
+  background-image: linear-gradient(rgb(212,175,55), transparent 60%);
+  top: -1px;
+  bottom: -1px;
+  width: 1px;
+}
+
+.main-body::before {
+  left: -1px;
+}
+.main-body::after {
+  right: -1px;
+}
+
+.content {
+    grid-column: content-start / content-end;
+
+    #border: 1px solid white;
+}
+
+.content h1 {
+    color: rgb(212,175,55);
+}
+
+.content p {
+    color: #979A9B;
+    line-height: 25px;
+    font-size: 19px;
+}

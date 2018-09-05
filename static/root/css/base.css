@@ -1,0 +1,127 @@
+@-webkit-keyframes bflow {
+    0%{background-position:0% 99%}
+    50%{background-position:100% 2%}
+    100%{background-position:0% 99%}
+}
+@-moz-keyframes bflow {
+    0%{background-position:0% 99%}
+    50%{background-position:100% 2%}
+    100%{background-position:0% 99%}
+}
+@keyframes bflow {
+    0%{background-position:0% 99%}
+    50%{background-position:100% 2%}
+    100%{background-position:0% 99%}
+}
+
+body {
+    #background: linear-gradient(220deg, #11131C, #04112d 50%);
+    background: radial-gradient(#04112d 60%, #11131C);
+    #background: #04112d;
+    #background-size: 400% 400%;
+
+    #-webkit-animation: bflow 15s ease infinite;
+    #-moz-animation: bflow 15s ease infinite;
+    #animation: bflow 15s ease infinite;
+}
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none;
+	color: #d6b448;
+	padding: 0px;
+	margin: 0px;
+	
+	#border: 1px solid white;
+}
+
+.container {
+    min-height: 100vh;
+    width:  98.9vw; /* When the scroll bar shows up it eats away from the viewport,
+                        so a horizontal scroll bar shows up as well. To counter this
+                        make sure the width of the page can account for a scroll bar*/
+
+    display: grid;
+    grid-template-columns: [start] 10vw [after-banner1] 10vw [content-start] auto [content-end]
+                            10vw [before-banner2] 10vw [end];
+    grid-template-rows: [start] 10vh [after-nav] 60vh auto [end];
+
+    color: white;
+    #box-shadow: 10px 10px 10px #FFF;
+    #border: 1px solid white;
+}
+
+.header {
+    grid-column: 1 / -1;
+    grid-row: 1 / span 2;
+
+    display: grid;
+    grid-template-columns: [start] 20px [first-banner] 5% auto [second-banner] 5% 20px [end];
+    grid-template-rows: [start] 10% [before-border] 8px [after-border] auto [end];
+
+    #border: 1px solid white;
+}
+
+.navbar {
+    grid-column: 1 / -1;
+    grid-row: 1 / after-border;
+    #background: #111321;
+
+    padding: 10px 0px 0px 0px;
+    position: relative;
+    text-align: center;
+
+    #border: 1px solid white;
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  
+  #background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(212,175,55)), to(transparent));
+  background-image: -webkit-linear-gradient(270deg, transparent, rgb(212,175,55), transparent);
+  background-image: -moz-linear-gradient(270deg, transparent, rgb(212,175,55), transparent);
+  background-image: -o-linear-gradient(270deg, transparent, rgb(212,175,55), transparent);
+  background-image: linear-gradient(270deg, transparent 7%, rgb(212,175,55), transparent 93%);
+  
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  height: 1px;
+}
+
+ul {
+    margin: auto;
+    #border: 1px solid white;
+}
+
+li {
+    display: inline;
+    margin: 3%;
+    color: rgb(212,175,55);
+    font-size: 19px;
+}
+
+#name {
+    font-size: 30px
+}
+
+.navbar {
+    #padding-top: 7px; /* For some reason this margin eats away from the width
+    					of the .nav-border, which spans from [before-border]
+    					to [after-border]*/
+}
+
+.banner1 {
+    grid-column: first-banner / span 1;
+}
+
+.banner2 {
+    grid-column: second-banner / span 1;
+}
+
+.banner {
+    grid-row: start / end;
+
+    background: linear-gradient(to bottom, #967c27 10%, #a3862a, #967c27 50%, rgba(0, 0, 0, 0));
+    #border: 1px solid white;
+}
